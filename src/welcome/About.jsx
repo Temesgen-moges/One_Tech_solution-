@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import pic from '../ass/pic.jpeg';
 
 function About() {
   const ref = React.useRef(null);
@@ -17,7 +18,8 @@ function About() {
     "Python",
     "Tailwind CSS",
     "MongoDB",
-    "RESTful APIs"
+    "RESTful APIs",
+    "Flutter"
   ];
 
   const containerVariants = {
@@ -77,7 +79,7 @@ function About() {
       </motion.div>
       
       <motion.div 
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
         style={{ opacity }}
         variants={containerVariants}
         initial="hidden"
@@ -87,7 +89,7 @@ function About() {
           className="text-center mb-16"
           variants={itemVariants}
         >
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent inline-block mb-3">
+          <h2 className="text-3xl font-bold text-white bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent inline-block mb-3">
             About Me
           </h2>
           <motion.div 
@@ -104,13 +106,13 @@ function About() {
             variants={itemVariants}
           >
             <motion.div 
-              className="w-full h-80 bg-gray-800 rounded-xl overflow-hidden relative"
+              className="w-full h-80 bg-white rounded-xl overflow-hidden relative shadow-md"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-indigo-600/30" />
-              <div className="h-full w-full flex items-center justify-center text-xl font-medium">
-                Your Profile Image Here
+              <div className="h-full w-full flex items-center justify-center">
+                <img src={pic} alt="About Me" className="object-contain h-full w-full" />
               </div>
             </motion.div>
             <motion.div 
@@ -132,19 +134,19 @@ function About() {
             variants={containerVariants}
           >
             <motion.h3 
-              className="text-2xl font-semibold"
+              className="text-2xl font-semibold text-white"
               variants={itemVariants}
             >
               Software Engineer
             </motion.h3>
             <motion.p 
-              className="text-gray-300"
+              className="text-white"
               variants={itemVariants}
             >
-              I'm Temesgen Moges, a passionate software engineer specializing in MERN stack and Python development. With a blend of technical expertise and creative problem-solving skills, I build robust applications that deliver exceptional user experiences.
+              I'm Temesgen Moges, a passionate software engineer specializing in MERN stack Python and Flutter development. With a blend of technical expertise and creative problem-solving skills, I build robust applications that deliver exceptional user experiences.
             </motion.p>
             <motion.p 
-              className="text-gray-300"
+              className="text-white"
               variants={itemVariants}
             >
               My journey in software development has equipped me with deep knowledge in MongoDB, Express.js, React, Node.js, and various Python frameworks. I'm committed to writing clean, maintainable code and always eager to explore new technologies.
@@ -156,7 +158,7 @@ function About() {
               {skills.map((skill, index) => (
                 <motion.span
                   key={skill}
-                  className="px-4 py-2 bg-gray-800 rounded-full text-sm"
+                  className="px-4 py-2 bg-gray-800 rounded-full text-sm text-white"
                   variants={itemVariants}
                   whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.2)" }}
                   whileTap={{ scale: 0.95 }}

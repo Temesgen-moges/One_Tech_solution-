@@ -30,8 +30,8 @@ function NavHome() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-8">
               <a href="#about" className="hover:text-blue-400 transition-colors">About</a>
-              <a href="#skills" className="hover:text-blue-400 transition-colors">Skills</a>
               <a href="#projects" className="hover:text-blue-400 transition-colors">Projects</a>
+              <a href="#skills" className="hover:text-blue-400 transition-colors">Skills</a>
               <a href="#contact" className="hover:text-blue-400 transition-colors">Contact</a>
               <a href="#" className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md transition-colors">Resume</a>
             </div>
@@ -55,8 +55,8 @@ function NavHome() {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-800">
             <a href="#about" className="block px-3 py-2 rounded-md hover:bg-gray-700">About</a>
-            <a href="#skills" className="block px-3 py-2 rounded-md hover:bg-gray-700">Skills</a>
             <a href="#projects" className="block px-3 py-2 rounded-md hover:bg-gray-700">Projects</a>
+            <a href="#skills" className="block px-3 py-2 rounded-md hover:bg-gray-700">Skills</a>
             <a href="#contact" className="block px-3 py-2 rounded-md hover:bg-gray-700">Contact</a>
             <a href="#" className="block px-3 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-center">Resume</a>
           </div>
