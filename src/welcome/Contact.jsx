@@ -137,7 +137,7 @@ function Contact() {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-white">Location</h3>
-                  <p className="text-gray-400">Available Worldwide</p>
+                  <p className="text-gray-400">Ethiopia</p>
                 </div>
               </div>
             </motion.div>
