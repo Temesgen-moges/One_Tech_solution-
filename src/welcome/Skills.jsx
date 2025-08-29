@@ -1,164 +1,121 @@
-import React from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { Trophy, Medal, Award, Star, ImageOff } from "lucide-react";
 
-function Skills() {
-  const skills = [
-    { name: "React", level: 90, color: "#61DAFB" },
-    { name: "Flutter", level: 88, color: "#02569B" },
-    { name: "Node.js", level: 85, color: "#339933" },
-    { name: "MongoDB", level: 80, color: "#47A248" },
-    { name: "Express.js", level: 85, color: "#000000" },
-    { name: "Python", level: 80, color: "#3776AB" },
-    { name: "JavaScript", level: 95, color: "#F7DF1E" },
-    { name: "Tailwind CSS", level: 90, color: "#06B6D4" },
-    { name: "Git", level: 85, color: "#F05032" }
-  ];
+const recognitions = [
+  {
+    id: "best-project-college",
+    title: "Best Project of the Year",
+    organizer: "College of Computing & Informatics",
+    place: 1,
+    image: "", // add your picture path or URL here
+  },
+  {
+    id: "best-project-dept",
+    title: "Best Project of the Year",
+    organizer: "Department of Software Engineering",
+    place: 1,
+    image: "", // add your picture path or URL here
+  },
+  {
+    id: "best-startup-developer",
+    title: "Best Startup Developer",
+    organizer: "Central Ethiopia",
+    place: 1,
+    image: "", // add your picture path or URL here
+  },
+  {
+    id: "hult-prize-wku",
+    title: "Hult Prize",
+    organizer: "Wolkite University",
+    place: 2,
+    image: "", // add your picture path or URL here
+  },
+];
 
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, { margin: "-100px", once: false });
+function placeBadge(place) {
+  if (place === 1) return { label: "1st Place", icon: Trophy };
+  if (place === 2) return { label: "2nd Place", icon: Medal };
+  if (place === 3) return { label: "3rd Place", icon: Award };
+  return { label: `${place}th Place`, icon: Star };
+}
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
+const spring = { type: "spring", stiffness: 200, damping: 20, mass: 0.8 };
 
-  // Animation controls
-  const cardAnimation = {
-    hidden: { opacity: 0, y: 50 },
-    show: { opacity: 1, y: 0 }
-  };
+export default function Recognitions() {
+  const [current, setCurrent] = useState(0);
+  const timeoutRef = useRef(null);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        when: "beforeChildren"
-      }
-    }
-  };
-
-  // Scroll progress animations
-  const titleScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.5, 1, 0.5]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
+  useEffect(() => {
+    const nextSlide = () => {
+      setCurrent((prev) => (prev + 1) % recognitions.length);
+    };
+    timeoutRef.current = setInterval(nextSlide, 3000); // change slide every 3s
+    return () => clearInterval(timeoutRef.current);
+  }, []);
 
   return (
-    <section 
-      ref={ref}
-      className="min-h-screen py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden"
-    >
-      {/* Animated background elements */}
-      <motion.div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          opacity: useTransform(scrollYProgress, [0, 1], [0.1, 0.3])
-        }}
-      >
-        <motion.div 
-          className="absolute top-20 right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
-          style={{
-            x: useTransform(scrollYProgress, [0, 1], [0, 200]),
-            rotate: useTransform(scrollYProgress, [0, 1], [0, 45])
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-20 left-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
-          style={{
-            x: useTransform(scrollYProgress, [0, 1], [0, -200]),
-            rotate: useTransform(scrollYProgress, [0, 1], [0, -45])
-          }}
-        />
-      </motion.div>
+    <div className="w-full max-w-5xl mx-auto px-4 py-10">
+      <header className="mb-6">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">
+          My Recognitions & Awards
+        </h1>
+        <p className="text-sm text-muted-foreground/80">
+          Award Highlights
+        </p>
+      </header>
 
-      {/* Main content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Title section */}
-        <motion.div 
-          className="text-center mb-16"
-          style={{
-            scale: titleScale,
-            opacity: titleOpacity
-          }}
-        >
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            Technical Skills
-          </h2>
-          <p className="mt-6 text-gray-400 text-lg">
-            Crafting digital experiences with modern technologies
-          </p>
-        </motion.div>
-
-        {/* Skills grid */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "show" : "hidden"}
-        >
-          {skills.map((skill, index) => (
-            <motion.div
-              key={skill.name}
-              variants={cardAnimation}
-              transition={{ type: "spring", stiffness: 100 }}
-              className="relative bg-gray-800 rounded-xl p-6 overflow-hidden group backdrop-blur-lg"
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: `0 0 25px ${skill.color}30`
-              }}
-            >
-              {/* Skill bar animation */}
+      {/* Carousel */}
+      <div className="relative w-full overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-zinc-900 shadow-md">
+        <div className="flex w-full">
+          {recognitions.map((item, index) => {
+            const badge = placeBadge(item.place);
+            const Icon = badge.icon;
+            return (
               <motion.div
-                initial={{ width: 0 }}
-                animate={isInView ? { width: `${skill.level}%` } : {}}
-                transition={{ duration: 1, delay: index * 0.1 }}
-                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500"
-              />
-              
-              <div className="relative z-10">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">
-                    {skill.name}
-                  </h3>
-                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                    {skill.level}%
+                key={item.id}
+                className="group min-w-full h-64 md:h-80 lg:h-96 flex-shrink-0 relative overflow-hidden"
+                animate={{ x: `-${current * 100}%` }}
+                transition={{ ease: "easeInOut", duration: 0.8 }}
+              >
+                {item.image ? (
+                  <motion.img
+                    src={item.image}
+                    alt={item.title}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-zinc-800">
+                    <ImageOff className="h-10 w-10 text-gray-400" />
+                  </div>
+                )}
+
+                {/* Always-visible rank badge */}
+                <div className="absolute top-3 left-3 z-20">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/20 text-amber-900 dark:text-amber-200 border border-amber-400/30 px-3 py-1 text-xs font-medium backdrop-blur-sm">
+                    <Icon className="h-4 w-4" /> {badge.label}
                   </span>
                 </div>
 
-                {/* Progress bar */}
-                <div className="w-full bg-gray-700 rounded-full h-3">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={isInView ? { width: `${skill.level}%` } : {}}
-                    transition={{ 
-                      duration: 1.5, 
-                      delay: index * 0.1 + 0.2,
-                      type: "spring",
-                      stiffness: 50
-                    }}
-                    className="h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
-                    style={{
-                      boxShadow: `0 0 20px ${skill.color}40`
-                    }}
-                  />
-                </div>
-
-                {/* Hover effect */}
+                {/* Hover Overlay */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: `radial-gradient(circle at center, ${skill.color}10 0%, transparent 70%)`
-                  }}
-                />
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+                  transition={{ duration: 0.4 }}
+                  className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center px-4"
+                >
+                  <h3 className="text-lg md:text-xl font-semibold text-white">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-200 mt-1">
+                    {item.organizer}
+                  </p>
+                </motion.div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
-
-export default Skills;
