@@ -41,23 +41,13 @@ function Projects() {
       technologies: ["React", "Node.js", "MongoDB", "Express", "Socket.io"],
       links: [
         { name: 'GitHub', url: 'https://github.com/Temesgen-moges/Ethio-capital-Front_end', icon: 'github' },
-        { name: 'Live Demo', url: 'https://ethio-capital-front-end.vercel.app/', icon: 'external-link-alt' }
+        { name: 'Live Demo', url: 'https://ethiocapital-front.onrender.com', icon: 'external-link-alt' }
       ]
     },
     {
       id: 3,
-      title: "Guess a Number Game",
-      description: "An interactive number-guessing game with Chapa payment integration for enhanced user engagement.",
-      image: game,
-      category: "mern",
-      technologies: ["React", "Redux", "Node.js", "MongoDB", "Chapa"],
-      links: [
-        { name: 'GitHub', url: 'https://github.com/Temesgen-moges/Game-pages/tree/main/src', icon: 'github' },
-        { name: 'Live Demo', url: 'https://github.com/Temesgen-moges/Game-pages/tree/main/src', icon: 'external-link-alt' }
-      ]
-    },
-    {
-      id: 4,
+
+
       title: "Ethio Tours",
       description: "An interactive platform showcasing Ethiopian tourist destinations with animations, an engaging UI, and dark/light mode support.",
       image: ethioo,
@@ -66,6 +56,24 @@ function Projects() {
       links: [
         { name: 'GitHub', url: 'https://github.com/Temesgen-moges/Ethio_Tour', icon: 'github' },
         { name: 'Live Demo', url: 'https://ethio-tour-lilac.vercel.app/', icon: 'external-link-alt' }
+      ]
+    },
+      
+      
+
+
+
+
+    {
+      id: 4,
+     title: "Guess a Number Game",
+      description: "An interactive number-guessing game with Chapa payment integration for enhanced user engagement.",
+      image: game,
+      category: "mern",
+      technologies: ["React", "Redux", "Node.js", "MongoDB", "Chapa"],
+      links: [
+        { name: 'GitHub', url: 'https://github.com/Temesgen-moges/Game-pages/tree/main/src', icon: 'github' },
+        { name: 'Live Demo', url: 'https://github.com/Temesgen-moges/Game-pages/tree/main/src', icon: 'external-link-alt' }
       ]
     },
     {
